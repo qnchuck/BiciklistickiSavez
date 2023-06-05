@@ -26,14 +26,21 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="130" Header="Klubovi">
+                    <GridViewColumn Width="160" Header="Klubovi">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Pregledaj klubove" Command="{Binding DataContext.PregledajKluboveCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="80" Header="Takmicari">
+                    <GridViewColumn Width="160" Header="Dokumentacije">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Pregledaj dokumentacije" Command="{Binding DataContext.PregledajDokumentacijeCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="150" Header="Takmicari">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Pregledaj takmicare" Command="{Binding DataContext.PregledajTakmicareCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
@@ -44,7 +51,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add New Planner" Command="{Binding AddNoviSavezCommand}" Margin="232,601,516,27" />
+        <Button Content="Dodaj novi savez" Command="{Binding AddNoviSavezCommand}" Margin="232,601,516,27" />
         <Button Content="Refresh data" Command="{Binding RefreshDataCommand}" Margin="536,601,212,27" />
     </Grid>
 </Window>
