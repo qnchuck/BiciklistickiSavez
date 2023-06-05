@@ -1,8 +1,11 @@
-﻿using BiciklistickiSavez.Database;
+﻿using BiciklistickiSavez.CRUD;
+using BiciklistickiSavez.Database;
 using BiciklistickiSavez.Views;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Migrations.Model;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,39 +19,90 @@ namespace BiciklistickiSavez.ViewModels
         public ObservableCollection<SystemModels.Models.BiciklistickiSavez> BiciklistickiSavezi { get; set; } = new ObservableCollection<SystemModels.Models.BiciklistickiSavez>();
         DBModels dBModels = DBModels.Instance;
 
-        private ICommand addNoviSavezCommand;
-        DBConversion dBConversion = new DBConversion();
+        public ICommand AddNoviSavezCommand { get; set; }
+        public ICommand PregledajTakmicareCommand { get; set; }
+        public ICommand AddBicikliCommand { get; set; }
+        public ICommand PregledajKluboveCommand { get; set; }
+        public ICommand PregledajDokumentacijeCommand { get; set; }
 
         public MainViewVM()
         {
-            LoadData();
+            LoadData(); 
+            AddNoviSavezCommand  = new RelayCommand(OpenNoviSavezForm);
+            PregledajTakmicareCommand = new RelayCommand<object>(Pregledaj);
+            AddBicikliCommand = new RelayCommand(DodajBicikli); 
+            PregledajKluboveCommand = new RelayCommand<object>(InfoKlubovi);
+            PregledajDokumentacijeCommand = new RelayCommand<object>(InfoDokumentacije);
         }
-        public ICommand AddNoviSavezCommand
-        {
-            get
-            {
-                if (addNoviSavezCommand == null)
-                {
-                    addNoviSavezCommand = new RelayCommand(param => OpenNoviSavezForm());
-                }
-                return addNoviSavezCommand;
-            }
-        }
-        private void OpenNoviSavezForm()
+
+        public void OpenNoviSavezForm()
         {
             NoviBiciklistickiSavezVM noviBiciklistickiSavezVM= new NoviBiciklistickiSavezVM();
             noviBiciklistickiSavezVM.SavezAdded += OsveziTabelu;
             NoviBiciklistickiSavez noviBiciklistickiSavez= new NoviBiciklistickiSavez(noviBiciklistickiSavezVM);
             noviBiciklistickiSavez.ShowDialog();
+        } 
+        public void DodajBicikli()
+        {
+            NoviBicikliVM noviBicikliVM= new NoviBicikliVM();
+            noviBicikliVM.BiciklAdded += OsveziTabelu;
+            NoviBicikli noviBicikli= new NoviBicikli(noviBicikliVM);
+            noviBicikli.ShowDialog();
         }
-        private void LoadData()
+        public  void LoadData()
         {
             BiciklistickiSavezi.Clear();
-            dBModels.Biciklisticki_Savez.ToList().ForEach(bs => BiciklistickiSavezi.Add(dBConversion.ConvertBiciklistickiSavez(bs)));
+            BiciklistickiSavezCRUD.Instance.GetAll().ForEach(bs => BiciklistickiSavezi.Add((bs)));
         }
         private void OsveziTabelu(object sender, EventArgs e)
         {
             LoadData();
+        }
+        private void Pregledaj(object parameter)
+        {
+            SystemModels.Models.BiciklistickiSavez savez = (SystemModels.Models.BiciklistickiSavez)parameter;
+            if (savez != null)
+            {
+                NoviTakmicarVM takmicarVM= new NoviTakmicarVM(savez.Takmicari, savez.Naziv);
+                NoviTakmicar takmicariWindow = new NoviTakmicar(takmicarVM);
+                takmicariWindow.ClosingEvents += OsveziTabelu;
+                takmicariWindow.ShowDialog();
+            }
+        }
+        private void InfoKlubovi(object param)
+        {
+            if (param is SystemModels.Models.BiciklistickiSavez item)
+            {
+                var noviKlubVM = new NoviKlubVM(item);
+                var secondWindow = new NoviKlub() { DataContext = noviKlubVM };
+                secondWindow.Closed += SecondWindowClosed;
+                secondWindow.Show();
+            }
+        }
+
+        private void InfoDokumentacije(object param)
+        {
+            if (param is SystemModels.Models.BiciklistickiSavez item)
+            {
+                var novaDokumentacijaVM = new NovaDokumentacijaVM(item);
+                var secondWindow = new NovaDokumentacija() { DataContext = novaDokumentacijaVM };
+                secondWindow.Closed += SecondWindowClosed;
+                secondWindow.Show();
+            }
+
+        }
+
+
+        private void SecondWindowClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

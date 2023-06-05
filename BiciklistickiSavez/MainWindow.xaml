@@ -51,7 +51,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Dodaj novi savez" Command="{Binding AddNoviSavezCommand}" Margin="232,601,516,27" />
-        <Button Content="Refresh data" Command="{Binding RefreshDataCommand}" Margin="536,601,212,27" />
+        <Button Content="Dodaj novi savez" Command="{Binding AddNoviSavezCommand}" Margin="412,601,336,27" />
+        <Button Content="Dodaj novi bicikl" Command="{Binding AddBicikliCommand}" Margin="10,601,827,27" />
+        <Button Content="Refresh data" Command="{Binding RefreshDataCommand}" Margin="662,601,86,27" />
     </Grid>
 </Window>

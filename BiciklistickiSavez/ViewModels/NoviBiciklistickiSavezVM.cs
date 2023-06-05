@@ -7,6 +7,9 @@ using System.Windows.Input;
 using System.Windows;
 using BiciklistickiSavez.Database;
 using BiciklistickiSavez.Views;
+using GalaSoft.MvvmLight.Command;
+using BiciklistickiSavez.CRUD;
+using SystemModels.Models;
 
 namespace BiciklistickiSavez.ViewModels
 {
@@ -15,6 +18,8 @@ namespace BiciklistickiSavez.ViewModels
         public NoviBiciklistickiSavezVM()
         {
 
+            AddSavezCommand = new RelayCommand<object>(AddSavez);
+            CancelCommand = new RelayCommand(Cancel);
         }
         public string Naziv { get; set; }
         public string Drzava{ get; set; }
@@ -22,33 +27,11 @@ namespace BiciklistickiSavez.ViewModels
         DBModels dBModels = DBModels.Instance;
         DBConversion dBConversion = new DBConversion();
 
-        public event EventHandler SavezAdded;
-        private ICommand addSavezCommand;
-        private ICommand cancelCommand;
+        public event EventHandler SavezAdded; 
+        public ICommand AddSavezCommand { get; set; }
+        private ICommand CancelCommand { get; set; }
 
-        public ICommand AddSavezCommand
-        {
-            get
-            {
-                if (addSavezCommand == null)
-                {
-                    addSavezCommand = new RelayCommand(AddSavez);
-                }
-                return addSavezCommand;
-            }
-        }
-
-        public ICommand CancelCommand
-        {
-            get
-            {
-                if (cancelCommand == null)
-                {
-                    cancelCommand = new RelayCommand(Cancel);
-                }
-                return cancelCommand;
-            }
-        }
+       
 
         private void AddSavez(object parameter)
         {
@@ -62,13 +45,12 @@ namespace BiciklistickiSavez.ViewModels
                 MessageBox.Show("Postoji savez sa tim nazivom");
                 return;
             }
-            dBModels.Biciklisticki_Savez.Add(
-                new Biciklisticki_Savez
-                {
-                    NZV = Naziv,
-                    DRZ = Drzava
-                });
-            dBModels.SaveChanges();
+            SystemModels.Models.BiciklistickiSavez savez = new SystemModels.Models.BiciklistickiSavez
+            {
+                Naziv = Naziv,
+                Drzava = Drzava
+            };
+            BiciklistickiSavezCRUD.Instance.Create(savez);
                 
          
 
@@ -81,7 +63,7 @@ namespace BiciklistickiSavez.ViewModels
             return  !string.IsNullOrEmpty(Naziv) &&
                 !string.IsNullOrEmpty(Drzava) ;
         }
-        private void Cancel(object parameter)
+        private void Cancel()
         {
             CloseForm();
         }

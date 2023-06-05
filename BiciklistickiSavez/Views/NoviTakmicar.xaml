@@ -1,0 +1,59 @@
+﻿<Window x:Class="BiciklistickiSavez.Views.NoviTakmicar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiciklistickiSavez.Views"
+        xmlns:local1="clr-namespace:BiciklistickiSavez.ViewModels"
+         
+        mc:Ignorable="d"
+        Title="NoviTakmicar" Height="329" Width="800">
+   
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Takmicari}" BorderBrush="Black" Margin="10,10,10,25">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100"  Header="JMBG" DisplayMemberBinding="{Binding JMBG}" />
+                    <GridViewColumn Width="100" Header="Ime" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Width="100"  Header="Prezime" DisplayMemberBinding="{Binding Prezime}" />
+                    <GridViewColumn Width="100" Header="Pol" DisplayMemberBinding="{Binding Pol}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Column="1" Margin="10,10,10,130">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Dodaj novog takmicara" FontWeight="Bold" FontSize="16" />
+
+            <Label Content="JMBG" Grid.Row="1" />
+            <TextBox Grid.Row="1" Margin="90,5,20,5" Text="{Binding JMBG}" />
+
+            <Label Content="Ime" Grid.Row="2" />
+            <TextBox Grid.Row="2" Margin="90,5,20,5" Text="{Binding Ime}" />
+
+            <Label Content="Prezime" Grid.Row="3" />
+            <TextBox Grid.Row="3" Margin="90,5,20,5" Text="{Binding Prezime}" />
+
+            <Label Content="Pol" Grid.Row="4" />
+            <TextBox Grid.Row="4" Margin="90,5,227,19" Text="{Binding Pol}" />
+
+
+            <Button Grid.Row="4" Content="Dodaj " Command="{Binding AddTakmicarCommand}" Margin="95,44,95,-25"/>
+
+
+        </Grid>
+    </Grid>
+</Window>

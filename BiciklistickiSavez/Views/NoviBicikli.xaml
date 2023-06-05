@@ -1,0 +1,50 @@
+﻿<Window x:Class="BiciklistickiSavez.Views.NoviBicikli"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiciklistickiSavez.Views"
+        mc:Ignorable="d"
+        Title="NoviBicikli" Height="450" Width="800">
+
+    <Grid>
+
+
+        <ListView ItemsSource="{Binding Bicikli}" BorderBrush="Black" Margin="10,10,384,25" Width="NaN">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="30"  Header="Id" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Width="100" Header="Zemlja porekla" DisplayMemberBinding="{Binding ZemljaPorekla}" />
+                    <GridViewColumn Width="100"  Header="Model" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Width="100" Header="Proizvodjac" DisplayMemberBinding="{Binding Proizvodjac}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Margin="572,10,10,259" Width="NaN" Height="NaN">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Dodaj novi bicikli" FontWeight="Bold" FontSize="16" />
+
+            <Label Content="Model" Grid.Row="2" />
+            <TextBox Grid.Row="2" Margin="90,5,20,5" Text="{Binding Model}" />
+
+            <Label Content="Proizvodjac" Grid.Row="3" />
+            <TextBox Grid.Row="3" Margin="90,5,20,5" Text="{Binding Proizvodjac}" />
+
+            <Label Content="Zemlja porekla" Grid.Row="4" />
+            <TextBox Grid.Row="4" Margin="90,5,20,19" Text="{Binding ZemljaPorekla}" />
+
+
+            <Button Grid.Row="5" Content="Dodaj " Command="{Binding AddBicikliCommand}" Margin="95,44,57,-25" Width="NaN"/>
+
+
+        </Grid>
+    </Grid>
+</Window>
