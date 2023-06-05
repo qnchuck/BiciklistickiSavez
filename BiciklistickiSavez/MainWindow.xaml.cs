@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BiciklistickiSavez.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace BiciklistickiSavez
         public MainWindow()
         {
             InitializeComponent();
+            var mainViewVM = new MainViewVM();
+
+            DataContext = mainViewVM;
         }
     }
 }

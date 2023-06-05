@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiciklistickiSavez", "BiciklistickiSavez\BiciklistickiSavez.csproj", "{B0481C67-4CE4-44EB-ABED-349F8502E36D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemModels", "SystemModels\SystemModels.csproj", "{1D8E1B5A-A9CD-4DFA-88B1-4AD97CD080F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B0481C67-4CE4-44EB-ABED-349F8502E36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0481C67-4CE4-44EB-ABED-349F8502E36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0481C67-4CE4-44EB-ABED-349F8502E36D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8E1B5A-A9CD-4DFA-88B1-4AD97CD080F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8E1B5A-A9CD-4DFA-88B1-4AD97CD080F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8E1B5A-A9CD-4DFA-88B1-4AD97CD080F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8E1B5A-A9CD-4DFA-88B1-4AD97CD080F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

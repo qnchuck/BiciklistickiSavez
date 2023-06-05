@@ -11,7 +11,16 @@ namespace BiciklistickiSavez.Database
             : base("name=DBModels")
         {
         }
+        private static readonly Lazy<DBModels> _instance =
+        new Lazy<DBModels>(() => new DBModels());
 
+        public static DBModels Instance
+        {
+            get
+            {
+                return _instance.Value;
+            }
+        }
         public virtual DbSet<Bicikli> Biciklis { get; set; }
         public virtual DbSet<Biciklisticki_Klub> Biciklisticki_Klub { get; set; }
         public virtual DbSet<Biciklisticki_Savez> Biciklisticki_Savez { get; set; }

@@ -1,0 +1,27 @@
+﻿<Window x:Class="BiciklistickiSavez.Views.NoviBiciklistickiSavez"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiciklistickiSavez.Views"
+        mc:Ignorable="d"
+        Title="NoviBiciklistickiSavez" Height="115" Width="316">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Naziv saveza:"/>
+        <TextBox Grid.Row="0" Width="200" Text="{Binding Naziv}" Margin="85,0,31,26" Grid.RowSpan="2"/>
+
+        <Label Grid.Row="1" Content="Drzava saveza:"/>
+        <TextBox Grid.Row="1" Width="200" Text="{Binding Drzava}" Margin="85,0,31,40" Grid.RowSpan="4"/>
+
+        <Button Grid.Row="4" Content="Dodaj savez" Command="{Binding AddSavezCommand}" Margin="85,10,148,10"/>
+        <Button Grid.Row="4" Content="Cancel" Command="{Binding CancelCommand}" Margin="210,10,31,10"/>
+    </Grid>
+</Window>
