@@ -11,9 +11,9 @@
             <ColumnDefinition Width="309*"/>
             <ColumnDefinition Width="293*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="tabelaKlubovi" ItemsSource="{Binding BiciklistickiKlubovi}"  AutoGenerateColumns="False" SelectionMode="Single" Margin="27,23,12,39" >
+        <DataGrid x:Name="tabelaKlubovi" ItemsSource="{Binding BiciklistickiKlubovi}"  AutoGenerateColumns="False" SelectionMode="Single" Margin="27,23,12,39" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding BiciklistickiKlub.Naziv}" IsReadOnly="False">
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" IsReadOnly="False">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -21,7 +21,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Lokacija" Binding="{Binding BiciklistickiKlub.Lokacija}" IsReadOnly="False">
+                <DataGridTextColumn Header="Lokacija" Binding="{Binding Lokacija}" IsReadOnly="False">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -29,7 +29,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Savez" Binding="{Binding BiciklistickiKlub.NazivSaveza}" IsReadOnly="False" >
+                <DataGridTextColumn Header="Savez" Binding="{Binding NazivSaveza}" IsReadOnly="False" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -44,6 +44,8 @@
                           Command="{Binding Path=DataContext.ModifyCommand,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" 
                                 CommandParameter="{Binding SelectedItem, ElementName=tabelaKlubovi}">
                             </Button>
+                            
+                            
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

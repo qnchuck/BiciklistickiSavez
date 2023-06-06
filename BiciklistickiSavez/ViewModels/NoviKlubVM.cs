@@ -53,9 +53,9 @@ namespace BiciklistickiSavez.ViewModels
             }
         }
 
-        private ICommand AddCommand { get; set; }
-        private ICommand ModifyCommand { get; set; }
-        private ICommand DeleteCommand { get; set; }
+        public ICommand AddCommand { get; set; }
+        public ICommand ModifyCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
 
         public NoviKlubVM(SystemModels.Models.BiciklistickiSavez savez)

@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="NovaDokumentacija" Height="319.75" Width="608">
     <Grid>
-        <DataGrid x:Name="tabelaDokumentacije" ItemsSource="{Binding Dokumentacije}"  AutoGenerateColumns="False" SelectionMode="Single" Margin="28,26,304,36" >
+        <DataGrid x:Name="tabelaDokumentacije" ItemsSource="{Binding Dokumentacije}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectionMode="Single" Margin="28,26,304,36" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Tekst" Binding="{Binding Dokumentacija.Tekst}" IsReadOnly="False">
+                <DataGridTextColumn Header="Tekst" Binding="{Binding Tekst}" IsReadOnly="False">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -18,7 +18,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Savez" Binding="{Binding Dokumentacija.NazivSaveza}" IsReadOnly="False" >
+                <DataGridTextColumn Header="Savez" Binding="{Binding NazivSaveza}" IsReadOnly="False" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
