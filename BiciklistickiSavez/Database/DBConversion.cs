@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 
 namespace BiciklistickiSavez.Database
 {
@@ -83,6 +83,22 @@ namespace BiciklistickiSavez.Database
                 ID = dokumentacija.ID_TXT,
                 Tekst = dokumentacija.TXT,
                 NazivSaveza = dokumentacija.NZV_SVZ
+            };
+        }
+        public SystemModels.Models.Radnik ConvertRadnik(Radnici radnici)
+        {
+
+            SystemModels.Models.TipZanimanja enumValue;
+            enumValue = (SystemModels.Models.TipZanimanja)Enum.Parse(typeof(SystemModels.Models.TipZanimanja), radnici.TIP_Z);
+
+            return new SystemModels.Models.Radnik
+            {
+                Ime = radnici.IME,
+                Prezime = radnici.PRZ,
+                Pol = radnici.POL,
+                JMBG = (radnici.JMBG),
+                NazivSaveza = radnici.NZV_SVZ,
+                TipZanimanja = enumValue
             };
         }
     }

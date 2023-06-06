@@ -5,64 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiciklistickiSavez.Views"
         mc:Ignorable="d"
-        Title="NoviKlub" Height="319.75" Width="608">
-    <Grid>
+        Title="NoviKlub" Height="319.75" Width="745">
+    <Grid Margin="0,0,33,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="309*"/>
-            <ColumnDefinition Width="293*"/>
+            <ColumnDefinition Width="439*"/>
+            <ColumnDefinition Width="267*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="tabelaKlubovi" ItemsSource="{Binding BiciklistickiKlubovi}"  AutoGenerateColumns="False" SelectionMode="Single" Margin="27,23,12,39" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" IsReadOnly="False">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Lokacija" Binding="{Binding Lokacija}" IsReadOnly="False">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Savez" Binding="{Binding NazivSaveza}" IsReadOnly="False" >
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTemplateColumn Header="Izmeni">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Izmeni"
-                          Command="{Binding Path=DataContext.ModifyCommand,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" 
-                                CommandParameter="{Binding SelectedItem, ElementName=tabelaKlubovi}">
-                            </Button>
-                            
-                            
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Obrisi" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Obrisi"
-                          Command="{Binding Path=DataContext.DeleteCommand,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" 
-                                CommandParameter="{Binding SelectedItem, ElementName=tabelaKlubovi}">
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
 
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView ItemsSource="{Binding BiciklistickiKlubovi}" BorderBrush="Black" Grid.ColumnSpan="2" Margin="0,0,222,37" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Naziv">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="100" Text="{Binding Naziv, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" Header="Lokacija">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="100" Text="{Binding Lokacija, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="100" Header="Savez">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="100" IsReadOnly="True" Text="{Binding NazivSaveza ,UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Width="100" Header="Obrisi">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Obrisi" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" Header="Izmeni">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Izmeni" Command="{Binding DataContext.ModifyCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+
+
         <Label Content="Naziv" HorizontalAlignment="Left" Height="39" Margin="55,58,0,0" VerticalAlignment="Top" Width="126" Grid.Column="1"/>
         <TextBox HorizontalAlignment="Left" Height="26" Margin="133,59,0,0" TextWrapping="Wrap" Text="{Binding Naziv, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="123" Grid.Column="1"/>
         <Label Content="Lokacija" HorizontalAlignment="Left" Height="33" Margin="54,110,0,0" VerticalAlignment="Top" Width="57" Grid.Column="1"/>

@@ -14,13 +14,12 @@ namespace BiciklistickiSavez.ViewModels
     public class NoviKlubVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private SystemModels.Models.BiciklistickiSavez savez { get; set; }
 
-        private readonly DBCrud.KlubCrud crud;
-
-        public ObservableCollection<SystemModels.Models.BiciklistickiKlub> BiciklistickiKlubovi { get; set; } 
+        public ObservableCollection<SystemModels.Models.BiciklistickiKlub> BiciklistickiKlubovi { get; set; }
          = new ObservableCollection<SystemModels.Models.BiciklistickiKlub>();
 
-        
+
         private string naziv;
         public string Naziv
         {
@@ -60,11 +59,10 @@ namespace BiciklistickiSavez.ViewModels
 
         public NoviKlubVM(SystemModels.Models.BiciklistickiSavez savez)
         {
-            this.crud = new KlubCrud();
-            
-            this.crud.GetAll().ForEach(klub => BiciklistickiKlubovi.Add(klub));
-            NazivSaveza = savez.Naziv;
 
+            KlubCrud.Instance.GetKluboviSavez(savez).ForEach(klub => BiciklistickiKlubovi.Add(klub));
+            NazivSaveza = savez.Naziv;
+            this.savez = savez;
             AddCommand = new RelayCommand(DodajKlub);
             DeleteCommand = new RelayCommand<object>(ObrisiKlub);
             ModifyCommand = new RelayCommand<object>(IzmeniKlub);
@@ -86,7 +84,7 @@ namespace BiciklistickiSavez.ViewModels
                 NazivSaveza = NazivSaveza
             };
 
-            this.crud.Create(klub);
+            KlubCrud.Instance.Create(klub);
             this.RefreshTable();
         }
 
@@ -94,7 +92,7 @@ namespace BiciklistickiSavez.ViewModels
         {
             if (param is SystemModels.Models.BiciklistickiKlub item)
             {
-                this.crud.Delete(item.ID);
+                KlubCrud.Instance.Delete(item.ID);
                 BiciklistickiKlubovi.Remove(item);
             }
 
@@ -104,7 +102,7 @@ namespace BiciklistickiSavez.ViewModels
         {
             if (param is SystemModels.Models.BiciklistickiKlub item)
             {
-                this.crud.Modify(item);
+                KlubCrud.Instance.Modify(item);
                 this.RefreshTable();
             }
         }
@@ -114,7 +112,7 @@ namespace BiciklistickiSavez.ViewModels
             BiciklistickiKlubovi.Clear();
             try
             {
-                this.crud.GetAll().ForEach(item => BiciklistickiKlubovi.Add(item));
+                KlubCrud.Instance.GetKluboviSavez(savez).ForEach(item => BiciklistickiKlubovi.Add(item));
             }
             catch (Exception ex)
             {

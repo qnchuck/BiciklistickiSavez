@@ -35,6 +35,6 @@ namespace BiciklistickiSavez.Database
 
         public virtual Radnici_Organizator Radnici_Organizator { get; set; }
 
-        public virtual Discipline Discipline { get; set; }
+        public virtual Radnici_Sudije Radnici_Sudije { get; set; }
     }
 }

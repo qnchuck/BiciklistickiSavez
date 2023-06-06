@@ -64,6 +64,28 @@ namespace BiciklistickiSavez.DBCrud
             return klubovi;
         }
 
+        public List<SystemModels.Models.BiciklistickiKlub> GetKluboviSavez(SystemModels.Models.BiciklistickiSavez savez)
+        {
+            List<SystemModels.Models.BiciklistickiKlub> klubovi = new List<SystemModels.Models.BiciklistickiKlub>();
+            try
+            {
+                dBModels.Biciklisticki_Klub
+                        .Where(k => savez.Naziv == k.NZV_SVZ)
+                        .ToList()
+                        .ForEach(k => klubovi.Add(conversion.ConvertBiciklistickiKlub(k)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return klubovi;
+        }
+
+
+
+
         public int Delete(int id)
         {
             int ret = -1;

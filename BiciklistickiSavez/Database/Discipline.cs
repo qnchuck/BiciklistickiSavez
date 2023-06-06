@@ -12,7 +12,7 @@ namespace BiciklistickiSavez.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Discipline()
         {
-            Radnicis = new HashSet<Radnici>();
+            Radnici_Sudije = new HashSet<Radnici_Sudije>();
         }
 
         [Key]
@@ -20,6 +20,6 @@ namespace BiciklistickiSavez.Database
         public string TIP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Radnici> Radnicis { get; set; }
+        public virtual ICollection<Radnici_Sudije> Radnici_Sudije { get; set; }
     }
 }

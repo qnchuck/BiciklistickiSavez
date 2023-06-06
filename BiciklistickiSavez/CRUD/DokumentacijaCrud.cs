@@ -38,7 +38,7 @@ namespace BiciklistickiSavez.DBCrud
                 });
                 dBModels.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -47,10 +47,28 @@ namespace BiciklistickiSavez.DBCrud
         public List<SystemModels.Models.Dokumentacija> GetAll()
         {
             List<SystemModels.Models.Dokumentacija> dokumentacije = new List<SystemModels.Models.Dokumentacija>();
-          
+
             try
             {
                 dBModels.Dokumentacijes.ToList().ForEach(d => dokumentacije.Add(conversion.ConvertDokumentacija(d)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dokumentacije;
+        }
+
+        public List<SystemModels.Models.Dokumentacija> GetSavezDokumentacije(SystemModels.Models.BiciklistickiSavez savez)
+        {
+            List<SystemModels.Models.Dokumentacija> dokumentacije = new List<SystemModels.Models.Dokumentacija>();
+
+            try
+            {
+                dBModels.Dokumentacijes.Where(d => savez.Naziv == d.NZV_SVZ)
+                                       .ToList()
+                                       .ForEach(d => dokumentacije.Add(conversion.ConvertDokumentacija(d)));
             }
             catch (Exception)
             {

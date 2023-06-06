@@ -84,14 +84,28 @@
     <Compile Include="CRUD\DokumentacijaCrud.cs" />
     <Compile Include="CRUD\IRepository.cs" />
     <Compile Include="CRUD\KlubCrud.cs" />
+    <Compile Include="CRUD\RadnikCrud.cs" />
     <Compile Include="CRUD\TakmicarCRUD.cs" />
+    <Compile Include="Database\Bicikli.cs" />
+    <Compile Include="Database\Biciklisticki_Klub.cs" />
+    <Compile Include="Database\Biciklisticki_Savez.cs" />
     <Compile Include="Database\DBConversion.cs" />
+    <Compile Include="Database\DBModels.cs" />
+    <Compile Include="Database\Discipline.cs" />
+    <Compile Include="Database\Dokumentacije.cs" />
     <Compile Include="Database\IConversion.cs" />
+    <Compile Include="Database\Radnici.cs" />
+    <Compile Include="Database\Radnici_Delegat.cs" />
+    <Compile Include="Database\Radnici_Organizator.cs" />
+    <Compile Include="Database\Radnici_Sudije.cs" />
+    <Compile Include="Database\Takmicari.cs" />
+    <Compile Include="Database\Takmicenja.cs" />
     <Compile Include="ViewModels\MainViewVM.cs" />
     <Compile Include="ViewModels\NovaDokumentacijaVM.cs" />
     <Compile Include="ViewModels\NoviBiciklistickiSavezVM.cs" />
     <Compile Include="ViewModels\NoviBicikliVM.cs" />
     <Compile Include="ViewModels\NoviKlubVM.cs" />
+    <Compile Include="ViewModels\NoviRadnikVM.cs" />
     <Compile Include="ViewModels\NoviTakmicarVM.cs" />
     <Compile Include="Views\NovaDokumentacija.xaml.cs">
       <DependentUpon>NovaDokumentacija.xaml</DependentUpon>
@@ -105,6 +119,9 @@
     <Compile Include="Views\NoviKlub.xaml.cs">
       <DependentUpon>NoviKlub.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NoviRadnik.xaml.cs">
+      <DependentUpon>NoviRadnik.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NoviTakmicar.xaml.cs">
       <DependentUpon>NoviTakmicar.xaml</DependentUpon>
     </Compile>
@@ -116,17 +133,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Database\Bicikli.cs" />
-    <Compile Include="Database\Biciklisticki_Klub.cs" />
-    <Compile Include="Database\Biciklisticki_Savez.cs" />
-    <Compile Include="Database\DBModels.cs" />
-    <Compile Include="Database\Discipline.cs" />
-    <Compile Include="Database\Dokumentacije.cs" />
-    <Compile Include="Database\Radnici.cs" />
-    <Compile Include="Database\Radnici_Delegat.cs" />
-    <Compile Include="Database\Radnici_Organizator.cs" />
-    <Compile Include="Database\Takmicari.cs" />
-    <Compile Include="Database\Takmicenja.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -144,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NoviKlub.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NoviRadnik.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

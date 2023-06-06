@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiciklistickiSavez"
         mc:Ignorable="d"
-        Title="MainWindow" Height="692" Width="965">
+        Title="MainWindow" Height="692" Width="1093">
     <Grid>
 
         <ListView ItemsSource="{Binding BiciklistickiSavezi}" BorderBrush="Black" Margin="10,90,86,95">
@@ -48,12 +48,18 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
+                    <GridViewColumn Width="150" Header="Radnici">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Pregledaj radnike" Command="{Binding DataContext.PregledajRadnikeCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Dodaj novi savez" Command="{Binding AddNoviSavezCommand}" Margin="412,601,336,27" />
-        <Button Content="Dodaj novi bicikl" Command="{Binding AddBicikliCommand}" Margin="10,601,827,27" />
+        <Button Content="Dodaj novi savez" Command="{Binding AddNoviSavezCommand}" Margin="828,601,86,27" />
+        <Button Content="Dodaj novi bicikl" Command="{Binding AddBicikliCommand}" Margin="10,601,907,27" />
        
     </Grid>
 </Window>

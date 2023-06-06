@@ -15,5 +15,6 @@ namespace BiciklistickiSavez.Conversion
         SystemModels.Models.Dokumentacija ConvertDokumentacija(Dokumentacije dokumentacija);
         SystemModels.Models.Bicikli ConvertBicikli(Bicikli bicikli);
         SystemModels.Models.Takmicar ConvertTakmicar(Takmicari takmicari);
+        SystemModels.Models.Radnik ConvertRadnik(Radnici radnici);
     }
 }

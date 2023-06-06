@@ -7,22 +7,55 @@
         xmlns:local1="clr-namespace:BiciklistickiSavez.ViewModels"
          
         mc:Ignorable="d"
-        Title="NoviTakmicar" Height="329" Width="800">
-   
+        Title="NoviTakmicar" Height="329" Width="826">
+
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" MinWidth="540" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <ListView ItemsSource="{Binding Takmicari}" BorderBrush="Black" Margin="10,10,10,25">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100"  Header="JMBG" DisplayMemberBinding="{Binding JMBG}" />
-                    <GridViewColumn Width="100" Header="Ime" DisplayMemberBinding="{Binding Ime}" />
-                    <GridViewColumn Width="100"  Header="Prezime" DisplayMemberBinding="{Binding Prezime}" />
-                    <GridViewColumn Width="100" Header="Pol" DisplayMemberBinding="{Binding Pol}" />
+
+                    <GridViewColumn Width="100" Header="Ime">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="145" Text="{Binding Ime, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" Header="Prezime">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="145" Text="{Binding Prezime, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="30" Header="Pol">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="145" Text="{Binding Pol, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" Header="Bicikli">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Pregledaj bicikle" Command="{Binding DataContext.PregledajBicikleCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" Header="Update">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Update" Command="{Binding DataContext.UpdateTakmicarCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -48,7 +81,7 @@
             <TextBox Grid.Row="3" Margin="90,5,20,5" Text="{Binding Prezime}" />
 
             <Label Content="Pol" Grid.Row="4" />
-            <TextBox Grid.Row="4" Margin="90,5,227,19" Text="{Binding Pol}" />
+            <TextBox Grid.Row="4" Margin="90,5,133,19" Text="{Binding Pol}" />
 
 
             <Button Grid.Row="4" Content="Dodaj " Command="{Binding AddTakmicarCommand}" Margin="95,44,95,-25"/>

@@ -12,8 +12,9 @@ namespace BiciklistickiSavez.Database
         {
         }
         private static readonly Lazy<DBModels> _instance =
-        new Lazy<DBModels>(() => new DBModels());
+       new Lazy<DBModels>(() => new DBModels());
 
+       
         public static DBModels Instance
         {
             get
@@ -29,6 +30,7 @@ namespace BiciklistickiSavez.Database
         public virtual DbSet<Radnici> Radnicis { get; set; }
         public virtual DbSet<Radnici_Delegat> Radnici_Delegat { get; set; }
         public virtual DbSet<Radnici_Organizator> Radnici_Organizator { get; set; }
+        public virtual DbSet<Radnici_Sudije> Radnici_Sudije { get; set; }
         public virtual DbSet<Takmicari> Takmicaris { get; set; }
         public virtual DbSet<Takmicenja> Takmicenjas { get; set; }
 
@@ -58,6 +60,12 @@ namespace BiciklistickiSavez.Database
                 .HasForeignKey(e => e.NZV_SVZ)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Discipline>()
+                .HasMany(e => e.Radnici_Sudije)
+                .WithRequired(e => e.Discipline)
+                .HasForeignKey(e => e.TIP_D)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Radnici>()
                 .HasOptional(e => e.Radnici_Delegat)
                 .WithRequired(e => e.Radnici)
@@ -67,6 +75,10 @@ namespace BiciklistickiSavez.Database
                 .HasOptional(e => e.Radnici_Organizator)
                 .WithRequired(e => e.Radnici)
                 .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Radnici>()
+                .HasOptional(e => e.Radnici_Sudije)
+                .WithRequired(e => e.Radnici);
 
             modelBuilder.Entity<Radnici_Delegat>()
                 .HasMany(e => e.Takmicenjas)

@@ -51,7 +51,17 @@ namespace BiciklistickiSavez.CRUD
 
         public int Modify(Takmicar entity)
         {
-            throw new NotImplementedException();
+            var takmicar = dBModels.Takmicaris.Find(entity.JMBG);
+
+            if (takmicar != null)
+            {
+                takmicar.IME = entity.Ime;
+                takmicar.PRZ = entity.Prezime;
+                takmicar.POL = entity.Pol;
+                // Save the changes to the database
+                return dBModels.SaveChanges();
+            }
+            return 0;
         }
     }
 }

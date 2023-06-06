@@ -15,7 +15,7 @@ namespace BiciklistickiSavez.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly DBCrud.DokumentacijaCrud crud;
+        private SystemModels.Models.BiciklistickiSavez savez { get; set; }
         public ObservableCollection<SystemModels.Models.Dokumentacija> Dokumentacije { get; set; }
          = new ObservableCollection<SystemModels.Models.Dokumentacija>();
 
@@ -47,11 +47,10 @@ namespace BiciklistickiSavez.ViewModels
 
         public NovaDokumentacijaVM(SystemModels.Models.BiciklistickiSavez savez)
         {
-            this.crud = new DokumentacijaCrud();
 
-            this.crud.GetAll().ForEach(d => Dokumentacije.Add(d));
+            DokumentacijaCrud.Instance.GetSavezDokumentacije(savez).ForEach(d => Dokumentacije.Add(d));
             NazivSaveza = savez.Naziv;
-
+            this.savez = savez;
             AddCommand = new RelayCommand(DodajDokumentaciju);
             DeleteCommand = new RelayCommand<object>(ObrisiDokumentaciju);
             ModifyCommand = new RelayCommand<object>(IzmeniDokumentaciju);
@@ -71,7 +70,7 @@ namespace BiciklistickiSavez.ViewModels
                 NazivSaveza = NazivSaveza
             };
 
-            this.crud.Create(dokumentacija);
+            DokumentacijaCrud.Instance.Create(dokumentacija);
             this.RefreshTable();
         }
 
@@ -79,7 +78,7 @@ namespace BiciklistickiSavez.ViewModels
         {
             if (param is SystemModels.Models.Dokumentacija item)
             {
-                this.crud.Delete(item.ID);
+                DokumentacijaCrud.Instance.Delete(item.ID);
                 Dokumentacije.Remove(item);
             }
 
@@ -89,7 +88,7 @@ namespace BiciklistickiSavez.ViewModels
         {
             if (param is SystemModels.Models.Dokumentacija item)
             {
-                this.crud.Modify(item);
+                DokumentacijaCrud.Instance.Modify(item);
                 this.RefreshTable();
             }
         }
@@ -99,7 +98,7 @@ namespace BiciklistickiSavez.ViewModels
             Dokumentacije.Clear();
             try
             {
-                this.crud.GetAll().ForEach(item => Dokumentacije.Add(item));
+                DokumentacijaCrud.Instance.GetSavezDokumentacije(savez).ForEach(d => Dokumentacije.Add(d));
             }
             catch (Exception ex)
             {

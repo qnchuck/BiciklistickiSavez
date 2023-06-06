@@ -25,6 +25,7 @@ namespace BiciklistickiSavez.ViewModels
             Takmicari = new ObservableCollection<SystemModels.Models.Takmicar> (takmicari);
             nazivSaveza = naziv;
             AddTakmicarCommand = new RelayCommand<object>(AddTakmicar);
+            UpdateTakmicarCommand = new RelayCommand<object>(UpdateTakmicarRow);
             this.TakmicarAdded += HandleTakmicarAdded;
         }
         public string JMBG { get; set; }
@@ -37,9 +38,10 @@ namespace BiciklistickiSavez.ViewModels
 
         public event EventHandler ClosingTakmicari;
 
-        private ICommand addTakmicarCommand;
         public ICommand WindowClosingCommand { get; }
         public ICommand AddTakmicarCommand { get; set; }
+        public ICommand PregledajBicikleCommand { get; set; }
+        public ICommand UpdateTakmicarCommand { get; set; }
         private void AddTakmicar(object parameter)
         {
             if (!AreRequiredFieldsFilled())
@@ -64,6 +66,16 @@ namespace BiciklistickiSavez.ViewModels
             TakmicarCRUD.Instance.Create(Takmicar);
             TakmicarAdded?.Invoke(this, EventArgs.Empty);
         }
+        private void UpdateTakmicarRow(object parameter)
+        {
+            SystemModels.Models.Takmicar takmicar = parameter as SystemModels.Models.Takmicar;
+            if (takmicar != null)
+            {
+
+                TakmicarCRUD.Instance.Modify(takmicar);
+            }
+        }
+
         private bool AreRequiredFieldsFilled()
         {
             return  !string.IsNullOrEmpty(Ime) && !string.IsNullOrEmpty(Prezime)

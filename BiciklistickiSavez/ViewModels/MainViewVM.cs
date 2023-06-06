@@ -25,6 +25,7 @@ namespace BiciklistickiSavez.ViewModels
         public ICommand PregledajKluboveCommand { get; set; }
         public ICommand PregledajDokumentacijeCommand { get; set; }
         public ICommand UpdateSavezCommand { get; set; }
+        public ICommand PregledajRadnikeCommand { get; set; }
 
         public MainViewVM()
         {
@@ -35,6 +36,17 @@ namespace BiciklistickiSavez.ViewModels
             PregledajKluboveCommand = new RelayCommand<object>(InfoKlubovi);
             PregledajDokumentacijeCommand = new RelayCommand<object>(InfoDokumentacije);
             UpdateSavezCommand = new RelayCommand<object>(UpdateSavezRow);
+            PregledajRadnikeCommand = new RelayCommand<object>(InfoRadnici);
+        }
+        private void InfoRadnici(object param)
+        {
+            if (param is SystemModels.Models.BiciklistickiSavez item)
+            {
+                var noviRadnikVM = new NoviRadnikVM(item);
+                var secondWindow = new NoviRadnik() { DataContext = noviRadnikVM };
+                secondWindow.Closed += SecondWindowClosed;
+                secondWindow.Show();
+            }
         }
 
         public void OpenNoviSavezForm()
