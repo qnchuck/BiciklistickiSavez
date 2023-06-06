@@ -24,6 +24,7 @@ namespace BiciklistickiSavez.ViewModels
         public ICommand AddBicikliCommand { get; set; }
         public ICommand PregledajKluboveCommand { get; set; }
         public ICommand PregledajDokumentacijeCommand { get; set; }
+        public ICommand UpdateSavezCommand { get; set; }
 
         public MainViewVM()
         {
@@ -33,6 +34,7 @@ namespace BiciklistickiSavez.ViewModels
             AddBicikliCommand = new RelayCommand(DodajBicikli); 
             PregledajKluboveCommand = new RelayCommand<object>(InfoKlubovi);
             PregledajDokumentacijeCommand = new RelayCommand<object>(InfoDokumentacije);
+            UpdateSavezCommand = new RelayCommand<object>(UpdateSavezRow);
         }
 
         public void OpenNoviSavezForm()
@@ -43,7 +45,7 @@ namespace BiciklistickiSavez.ViewModels
             noviBiciklistickiSavez.ShowDialog();
         } 
         public void DodajBicikli()
-        {
+         {
             NoviBicikliVM noviBicikliVM= new NoviBicikliVM();
             noviBicikliVM.BiciklAdded += OsveziTabelu;
             NoviBicikli noviBicikli= new NoviBicikli(noviBicikliVM);
@@ -58,6 +60,17 @@ namespace BiciklistickiSavez.ViewModels
         {
             LoadData();
         }
+        private void UpdateSavezRow(object parameter)
+        {
+            SystemModels.Models.BiciklistickiSavez savez = parameter as SystemModels.Models.BiciklistickiSavez;
+            if (savez != null)
+            {
+
+                BiciklistickiSavezCRUD.Instance.Modify(savez);
+            }
+            LoadData();
+        }
+
         private void Pregledaj(object parameter)
         {
             SystemModels.Models.BiciklistickiSavez savez = (SystemModels.Models.BiciklistickiSavez)parameter;

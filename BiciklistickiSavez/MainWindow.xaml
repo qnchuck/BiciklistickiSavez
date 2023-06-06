@@ -11,13 +11,7 @@
         <ListView ItemsSource="{Binding BiciklistickiSavezi}" BorderBrush="Black" Margin="10,90,86,95">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="155" Header="Naziv saveza">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Width="145" Text="{Binding Naziv, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Width="155"  Header="Naziv saveza" DisplayMemberBinding="{Binding Naziv}" />
                     <GridViewColumn Width="155" Header="Drzava">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -47,12 +41,19 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                  
+                    <GridViewColumn Width="80" Header="Update">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Update" Command="{Binding DataContext.UpdateSavezCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>
         <Button Content="Dodaj novi savez" Command="{Binding AddNoviSavezCommand}" Margin="412,601,336,27" />
         <Button Content="Dodaj novi bicikl" Command="{Binding AddBicikliCommand}" Margin="10,601,827,27" />
-        <Button Content="Refresh data" Command="{Binding RefreshDataCommand}" Margin="662,601,86,27" />
+       
     </Grid>
 </Window>

@@ -41,13 +41,25 @@ namespace BiciklistickiSavez.CRUD
         public List<SystemModels.Models.BiciklistickiSavez> GetAll()
         {
             List<SystemModels.Models.BiciklistickiSavez> savezi = new List<SystemModels.Models.BiciklistickiSavez>();
-            dBModels.Biciklisticki_Savez.ToList().ForEach(t => savezi.Add(conversion.ConvertBiciklistickiSavez(t)));
+            List<Biciklisticki_Savez> saveziDB = dBModels.Biciklisticki_Savez.ToList();
+
+            saveziDB.ForEach(t => savezi.Add(conversion.ConvertBiciklistickiSavez(t)));
             return savezi;
         }
 
         public int Modify(SystemModels.Models.BiciklistickiSavez entity)
         {
-            throw new NotImplementedException();
+            var savez = dBModels.Biciklisticki_Savez.Find(entity.Naziv);
+
+            if (savez != null)
+            {
+                savez.NZV = entity.Naziv;
+                savez.DRZ = entity.Drzava;
+
+                // Save the changes to the database
+                return dBModels.SaveChanges();
+            }
+            return 0;
         }
     }
 }
