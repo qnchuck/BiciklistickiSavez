@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BiciklistickiSavez"
         mc:Ignorable="d"
-        Title="MainWindow" Height="692" Width="1093">
+        Title="MainWindow" Height="692" Width="1193">
     <Grid>
 
         <ListView ItemsSource="{Binding BiciklistickiSavezi}" BorderBrush="Black" Margin="10,90,86,95">
@@ -52,6 +52,13 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Pregledaj radnike" Command="{Binding DataContext.PregledajRadnikeCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" Header="Brisanje">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Obrisi" Command="{Binding DataContext.RemoveSavezCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

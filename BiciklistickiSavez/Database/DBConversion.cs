@@ -56,7 +56,8 @@ namespace BiciklistickiSavez.Database
                 ID = bicikli.ID_B,
                 Model= bicikli.MOD ,
                 Proizvodjac = bicikli.PRO,
-                ZemljaPorekla = bicikli.ZEM_P
+                ZemljaPorekla = bicikli.ZEM_P,
+                JmbgT = bicikli.JMBG_T
             };
 
         }

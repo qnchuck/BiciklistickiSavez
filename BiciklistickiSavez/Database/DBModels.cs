@@ -37,28 +37,24 @@ namespace BiciklistickiSavez.Database
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Biciklisticki_Savez>()
-                .HasMany(e => e.Biciklisticki_Klub)
-                .WithRequired(e => e.Biciklisticki_Savez)
-                .HasForeignKey(e => e.NZV_SVZ)
-                .WillCascadeOnDelete(false);
+                 .HasMany(e => e.Biciklisticki_Klub)
+                 .WithRequired(e => e.Biciklisticki_Savez)
+                 .HasForeignKey(e => e.NZV_SVZ);
 
             modelBuilder.Entity<Biciklisticki_Savez>()
                 .HasMany(e => e.Dokumentacijes)
                 .WithRequired(e => e.Biciklisticki_Savez)
-                .HasForeignKey(e => e.NZV_SVZ)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(e => e.NZV_SVZ);
 
             modelBuilder.Entity<Biciklisticki_Savez>()
                 .HasMany(e => e.Radnicis)
                 .WithRequired(e => e.Biciklisticki_Savez)
-                .HasForeignKey(e => e.NZV_SVZ)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(e => e.NZV_SVZ);
 
             modelBuilder.Entity<Biciklisticki_Savez>()
                 .HasMany(e => e.Takmicaris)
                 .WithRequired(e => e.Biciklisticki_Savez)
-                .HasForeignKey(e => e.NZV_SVZ)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(e => e.NZV_SVZ);
 
             modelBuilder.Entity<Discipline>()
                 .HasMany(e => e.Radnici_Sudije)

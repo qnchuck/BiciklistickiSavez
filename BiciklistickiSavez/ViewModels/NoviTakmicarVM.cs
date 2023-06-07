@@ -11,6 +11,8 @@ using BiciklistickiSavez.CRUD;
 using System.Globalization;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.Command;
+using BiciklistickiSavez.Views;
+using System.Text.RegularExpressions;
 
 namespace BiciklistickiSavez.ViewModels
 {
@@ -26,6 +28,8 @@ namespace BiciklistickiSavez.ViewModels
             nazivSaveza = naziv;
             AddTakmicarCommand = new RelayCommand<object>(AddTakmicar);
             UpdateTakmicarCommand = new RelayCommand<object>(UpdateTakmicarRow);
+            RemoveTakmicarCommand = new RelayCommand<object>(RemoveTakmicarRow);
+            PregledajBicikleCommand = new RelayCommand<object>(PregledajBicikle);
             this.TakmicarAdded += HandleTakmicarAdded;
         }
         public string JMBG { get; set; }
@@ -42,6 +46,7 @@ namespace BiciklistickiSavez.ViewModels
         public ICommand AddTakmicarCommand { get; set; }
         public ICommand PregledajBicikleCommand { get; set; }
         public ICommand UpdateTakmicarCommand { get; set; }
+        public ICommand RemoveTakmicarCommand { get; set; }
         private void AddTakmicar(object parameter)
         {
             if (!AreRequiredFieldsFilled())
@@ -74,18 +79,45 @@ namespace BiciklistickiSavez.ViewModels
 
                 TakmicarCRUD.Instance.Modify(takmicar);
             }
-        }
+        } 
+        
+        private void RemoveTakmicarRow(object parameter)
+        {
+            SystemModels.Models.Takmicar takmicar = parameter as SystemModels.Models.Takmicar;
+            if (takmicar != null)
+            {
 
+                TakmicarCRUD.Instance.DeleteTakmicar(takmicar.JMBG);
+            }
+            Takmicari.Clear();
+            TakmicarCRUD.Instance.GetAll().Where(t => t.NazivSaveza == nazivSaveza).ToList().ForEach(tt => Takmicari.Add(tt));
+        }
+        private void PregledajBicikle(object parameter)
+        {
+            SystemModels.Models.Takmicar takmicar = (SystemModels.Models.Takmicar)parameter;
+            if (takmicar != null)
+            {
+                BicikliPregledVM bicikliPregledVM = new BicikliPregledVM(takmicar.Bicikli, takmicar.JMBG);
+                BicikliPregled bicikliW = new BicikliPregled(bicikliPregledVM);
+                bicikliW.ClosingEvents += OsveziTabelu;
+                bicikliW.ShowDialog();
+            }
+        }
         private bool AreRequiredFieldsFilled()
         {
             return  !string.IsNullOrEmpty(Ime) && !string.IsNullOrEmpty(Prezime)
                 && (Pol.ToUpper()=="M"||Pol.ToUpper()=="Z");
         }
-
+        private void OsveziTabelu(object sender, EventArgs e)
+        {
+            Takmicari.Clear();
+            TakmicarCRUD.Instance.GetAll().Where(t => t.NazivSaveza == nazivSaveza).ToList().ForEach(tt=> Takmicari.Add(tt));
+        }
         private void HandleTakmicarAdded(object sender, EventArgs e)
         {
             Takmicari.Add(Takmicar);
         }
+        
 
     }
     

@@ -100,6 +100,7 @@
     <Compile Include="Database\Radnici_Sudije.cs" />
     <Compile Include="Database\Takmicari.cs" />
     <Compile Include="Database\Takmicenja.cs" />
+    <Compile Include="ViewModels\BicikliPregledVM.cs" />
     <Compile Include="ViewModels\MainViewVM.cs" />
     <Compile Include="ViewModels\NovaDokumentacijaVM.cs" />
     <Compile Include="ViewModels\NoviBiciklistickiSavezVM.cs" />
@@ -107,6 +108,9 @@
     <Compile Include="ViewModels\NoviKlubVM.cs" />
     <Compile Include="ViewModels\NoviRadnikVM.cs" />
     <Compile Include="ViewModels\NoviTakmicarVM.cs" />
+    <Compile Include="Views\BicikliPregled.xaml.cs">
+      <DependentUpon>BicikliPregled.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NovaDokumentacija.xaml.cs">
       <DependentUpon>NovaDokumentacija.xaml</DependentUpon>
     </Compile>
@@ -137,6 +141,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BicikliPregled.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NovaDokumentacija.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

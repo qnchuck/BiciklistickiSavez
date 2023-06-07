@@ -16,10 +16,14 @@ namespace BiciklistickiSavez.ViewModels
         public ObservableCollection<SystemModels.Models.Bicikli> Bicikli { get; set; }
         public SystemModels.Models.Bicikli Bicikl;
 
+        public ICommand UpdateBicikloCommand { get; set; }
+        public ICommand RemoveBicikloCommand { get; set; }
         public NoviBicikliVM()
         {
             Bicikli = new ObservableCollection<SystemModels.Models.Bicikli>(BicikliCRUD.Instance.GetAll());
             AddBicikliCommand = new RelayCommand<object>(AddBicikli);
+            UpdateBicikloCommand = new RelayCommand<object>(UpdateBicikloRow);
+            RemoveBicikloCommand = new RelayCommand<object>(RemoveBicikloRow);
             this.BiciklAdded += HandleBiciklAdded;
         }
         public string Model { get; set; }
@@ -27,8 +31,6 @@ namespace BiciklistickiSavez.ViewModels
         public string ZemljaPorekla { get; set; }
 
         public event EventHandler BiciklAdded;
-
-        public event EventHandler ClosingTakmicari;
 
         public ICommand WindowClosingCommand { get; }
         public ICommand AddBicikliCommand { get; set; }
@@ -55,7 +57,25 @@ namespace BiciklistickiSavez.ViewModels
 
 
         }
+        private void RemoveBicikloRow(object parameter)
+        {
+            SystemModels.Models.Bicikli bicikli = parameter as SystemModels.Models.Bicikli;
+            if (bicikli != null)
+            {
+                BicikliCRUD.Instance.Delete(bicikli.ID);
+            }
+            Bicikli.Clear();
+            BicikliCRUD.Instance.GetAll().ToList().ForEach(bic => Bicikli.Add(bic));
+        }
 
+        private void UpdateBicikloRow(object parameter)
+        {
+            SystemModels.Models.Bicikli bicikl = parameter as SystemModels.Models.Bicikli;
+            if (bicikl != null)
+            {
+                BicikliCRUD.Instance.Modify(bicikl);
+            }
+        }
         private void HandleBiciklAdded(object sender, EventArgs e)
         {
             Bicikli.Add(Bicikl);

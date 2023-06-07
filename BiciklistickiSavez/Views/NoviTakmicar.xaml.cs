@@ -1,5 +1,6 @@
 ﻿using BiciklistickiSavez.ViewModels;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace BiciklistickiSavez.Views
@@ -22,6 +23,12 @@ namespace BiciklistickiSavez.Views
         {
             base.OnClosed(e);
             ClosingEvents?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void NumericTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

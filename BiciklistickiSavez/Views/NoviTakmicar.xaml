@@ -7,7 +7,7 @@
         xmlns:local1="clr-namespace:BiciklistickiSavez.ViewModels"
          
         mc:Ignorable="d"
-        Title="NoviTakmicar" Height="329" Width="826">
+        Title="NoviTakmicar" Height="329" Width="929.416">
 
     <Grid>
 
@@ -56,6 +56,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Width="80" Header="Brisanje">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Obrisi" Command="{Binding DataContext.RemoveTakmicarCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -72,7 +79,7 @@
             <TextBlock Text="Dodaj novog takmicara" FontWeight="Bold" FontSize="16" />
 
             <Label Content="JMBG" Grid.Row="1" />
-            <TextBox Grid.Row="1" Margin="90,5,20,5" Text="{Binding JMBG}" />
+            <TextBox PreviewTextInput="NumericTextBox_PreviewTextInput" Grid.Row="1" Margin="90,5,20,5" Text="{Binding JMBG}" />
 
             <Label Content="Ime" Grid.Row="2" />
             <TextBox Grid.Row="2" Margin="90,5,20,5" Text="{Binding Ime}" />
@@ -81,7 +88,7 @@
             <TextBox Grid.Row="3" Margin="90,5,20,5" Text="{Binding Prezime}" />
 
             <Label Content="Pol" Grid.Row="4" />
-            <TextBox Grid.Row="4" Margin="90,5,133,19" Text="{Binding Pol}" />
+            <TextBox Grid.Row="4" Margin="90,5,125,19" Text="{Binding Pol}" />
 
 
             <Button Grid.Row="4" Content="Dodaj " Command="{Binding AddTakmicarCommand}" Margin="95,44,95,-25"/>

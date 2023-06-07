@@ -12,5 +12,6 @@ namespace SystemModels.Models
         public string ZemljaPorekla { get; set; }
         public string Model { get; set; }
         public string Proizvodjac { get; set; }
+        public string JmbgT { get; set; }
     }
 }

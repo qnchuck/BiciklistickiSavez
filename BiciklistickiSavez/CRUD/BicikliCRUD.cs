@@ -36,7 +36,10 @@ namespace BiciklistickiSavez.CRUD
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            var bicikl = dBModels.Biciklis.Where(x => x.ID_B == id).FirstOrDefault();
+            dBModels.Biciklis.Remove(bicikl);
+            return dBModels.SaveChanges();
+            
         }
 
         public List<SystemModels.Models.Bicikli> GetAll()
@@ -48,7 +51,18 @@ namespace BiciklistickiSavez.CRUD
 
         public int Modify(SystemModels.Models.Bicikli entity)
         {
-            throw new NotImplementedException();
+            var bicikl = dBModels.Biciklis.Find(entity.ID);
+
+            if (bicikl != null)
+            {
+                bicikl.JMBG_T = entity.JmbgT;
+                bicikl.MOD = entity.Model;
+                bicikl.PRO = entity.Proizvodjac;
+                bicikl.ZEM_P = entity.ZemljaPorekla;
+                // Save the changes to the database
+                return dBModels.SaveChanges();
+            }
+            return 0;
         }
     }
 }

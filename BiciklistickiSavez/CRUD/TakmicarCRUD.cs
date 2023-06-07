@@ -40,6 +40,12 @@ namespace BiciklistickiSavez.CRUD
         public int Delete(int id)
         {
             throw new NotImplementedException();
+        } 
+        public int DeleteTakmicar(string jmbg)
+        {
+            var takmicar = dBModels.Takmicaris.Where(x => x.JMBG == jmbg).FirstOrDefault();
+            dBModels.Takmicaris.Remove(takmicar);
+            return dBModels.SaveChanges();
         }
 
         public List<SystemModels.Models.Takmicar> GetAll()

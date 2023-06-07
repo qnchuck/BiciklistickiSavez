@@ -35,7 +35,22 @@ namespace BiciklistickiSavez.CRUD
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+
+            return 0;
+        }
+        public int DeleteSavez(string naziv)
+        {
+            try
+            {
+
+                var savez = dBModels.Biciklisticki_Savez.Where(x => x.NZV == naziv).FirstOrDefault();
+                dBModels.Biciklisticki_Savez.Remove(savez);
+                return dBModels.SaveChanges();
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return 0;
         }
 
         public List<SystemModels.Models.BiciklistickiSavez> GetAll()

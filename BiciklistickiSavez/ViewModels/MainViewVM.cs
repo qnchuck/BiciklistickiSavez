@@ -25,17 +25,19 @@ namespace BiciklistickiSavez.ViewModels
         public ICommand PregledajKluboveCommand { get; set; }
         public ICommand PregledajDokumentacijeCommand { get; set; }
         public ICommand UpdateSavezCommand { get; set; }
+        public ICommand RemoveSavezCommand { get; set; }
         public ICommand PregledajRadnikeCommand { get; set; }
 
         public MainViewVM()
         {
             LoadData(); 
             AddNoviSavezCommand  = new RelayCommand(OpenNoviSavezForm);
-            PregledajTakmicareCommand = new RelayCommand<object>(Pregledaj);
+            PregledajTakmicareCommand = new RelayCommand<object>(PregledajTakmicare);
             AddBicikliCommand = new RelayCommand(DodajBicikli); 
             PregledajKluboveCommand = new RelayCommand<object>(InfoKlubovi);
             PregledajDokumentacijeCommand = new RelayCommand<object>(InfoDokumentacije);
             UpdateSavezCommand = new RelayCommand<object>(UpdateSavezRow);
+            RemoveSavezCommand = new RelayCommand<object>(RemoveSavezRow);
             PregledajRadnikeCommand = new RelayCommand<object>(InfoRadnici);
         }
         private void InfoRadnici(object param)
@@ -83,7 +85,7 @@ namespace BiciklistickiSavez.ViewModels
             LoadData();
         }
 
-        private void Pregledaj(object parameter)
+        private void PregledajTakmicare(object parameter)
         {
             SystemModels.Models.BiciklistickiSavez savez = (SystemModels.Models.BiciklistickiSavez)parameter;
             if (savez != null)
@@ -117,7 +119,16 @@ namespace BiciklistickiSavez.ViewModels
 
         }
 
+        private void RemoveSavezRow(object parameter)
+        {
+            SystemModels.Models.BiciklistickiSavez savez = parameter as SystemModels.Models.BiciklistickiSavez;
+            if (savez != null)
+            {
 
+                BiciklistickiSavezCRUD.Instance.DeleteSavez(savez.Naziv);
+            }
+            LoadData();
+        }
         private void SecondWindowClosed(object sender, EventArgs e)
         {
             try

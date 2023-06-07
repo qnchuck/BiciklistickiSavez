@@ -1,0 +1,47 @@
+﻿<Window x:Class="BiciklistickiSavez.Views.BicikliPregled"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiciklistickiSavez.Views"
+        mc:Ignorable="d"
+        Title="BicikliPregled" Height="450" Width="452.006">
+    <Grid>
+        <ListView ItemsSource="{Binding OwnedBicycles}" BorderBrush="Black" Margin="10,10,10,282">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100"  Header="Model" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Width="100" Header="Proizvodjac" DisplayMemberBinding="{Binding Proizvodjac}" />
+                    <GridViewColumn Width="100"  Header="Zemlja Porekla" DisplayMemberBinding="{Binding ZemljaPorekla}" />
+                    <GridViewColumn Width="95" Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="85" Content="Prodaj bicikli" Command="{Binding DataContext.ProdajBicikloCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Text="Bicikli bez vlasnika" Margin="10,227,389,199"></TextBlock>
+        <ListView ItemsSource="{Binding NotOwnedBicycles}" BorderBrush="Black" Margin="10,253,10,39">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100"  Header="Model" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Width="100" Header="Proizvodjac" DisplayMemberBinding="{Binding Proizvodjac}" />
+                    <GridViewColumn Width="100"  Header="Zemlja Porekla" DisplayMemberBinding="{Binding ZemljaPorekla}" />
+                    <GridViewColumn Width="95" Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="85" Content="Kupi bicikli" Command="{Binding DataContext.KupiBicikloCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

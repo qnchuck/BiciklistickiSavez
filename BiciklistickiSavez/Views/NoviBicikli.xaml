@@ -3,20 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BiciklistickiSavez.Views"
+        xmlns:local="clr-namespace:BiciklistickiSavez.Views" 
+        xmlns:Views="clr-namespace:BiciklistickiSavez.ViewModels"
         mc:Ignorable="d"
         Title="NoviBicikli" Height="450" Width="800">
-
+   
     <Grid>
 
 
-        <ListView ItemsSource="{Binding Bicikli}" BorderBrush="Black" Margin="10,10,384,25" Width="NaN">
+        <ListView ItemsSource="{Binding Bicikli}" BorderBrush="Black" Margin="10,10,264,25" Width="NaN">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="30"  Header="Id" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Width="100" Header="Zemlja porekla" DisplayMemberBinding="{Binding ZemljaPorekla}" />
-                    <GridViewColumn Width="100"  Header="Model" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Width="100" Header="Proizvodjac" DisplayMemberBinding="{Binding Proizvodjac}" />
+                   
+                    <GridViewColumn Width="110" Header="Proizvodjac">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="100" Text="{Binding Proizvodjac, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="110" Header="Model">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="100" Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="110" Header="Zemlja porekla">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="100" Text="{Binding ZemljaPorekla, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" Header="Update">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Update" Command="{Binding DataContext.UpdateBicikloCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="80" Header="Delete">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="60" Content="Delete" Command="{Binding DataContext.RemoveBicikloCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
